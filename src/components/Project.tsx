@@ -130,7 +130,7 @@ const Projects: React.FC<ProjectsProps> = ({ projets }) => {
                     scale: hoveredProject === projet.id ? 1.1 : 1,
                   }}
                   transition={{ duration: 0.4 }}
-                  src={`/src/assets/images/${projet.image}`}
+                  src={`/images/${projet.image}`}
                   alt={projet.titre}
                   className="w-full h-48 object-cover"
                 />
@@ -303,7 +303,7 @@ const Projects: React.FC<ProjectsProps> = ({ projets }) => {
                     </div>
                     
                     <img 
-                      src={`/src/assets/images/${projet.image}`} 
+                      src={`/images/${projet.image}`} 
                       alt={projet.titre}
                       className="w-full h-64 object-cover rounded-lg mb-4"
                     />
