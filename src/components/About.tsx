@@ -1,44 +1,44 @@
 import { motion } from "framer-motion";
-import { FaCode, FaLaptopCode, FaServer } from "react-icons/fa";
 
-interface SkillCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-const SkillCard: React.FC<SkillCardProps> = ({ icon, title, description }) => {
-  return (
-    <motion.div
-      whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-      className="bg-gray-700 p-6 rounded-lg shadow-md"
-    >
-      <div className="text-blue-400 text-3xl mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-300">{description}</p>
-    </motion.div>
-  );
-};
+const timeline = [
+  {
+    year: "2020 - 2021",
+    title: "Baccalauréat Scientifique",
+    location: "Saint Dominique au Congo-Brazzaville",
+    description: "Obtention du baccalauréat scientifique, spécialité mathématique.",
+    side: "left",
+  },
+  {
+    year: "Juillet 2021 - Aout 2021",
+    title: "Stage d'un mois",
+    location: "Entreprise TGI a Dakar ",
+    description: "Stage d'initiation au développement web et Maintenance Informatique, premières expériences professionnelles.",
+    side: "right",
+  },
+  {
+    year: "2023 - 2024",
+    title: "Licence Informatique",
+    location: "Univers Professionnel de Dakar (UNIPRO)",
+    description: "Développement de projets web, mobile et gestion de projet. Approfondissement des compétences techniques.",
+    side: "left",
+  },
+  {
+    year: "Août 2024 - Janvier 2025",
+    title: "Stage de 6 mois dans l'entreprise GATS (gatsmapping)",
+    location: "Entreprise GATS",
+    description: "Stage de 6 mois en développement full stack, participation à des projets d'envergure.",
+    side: "right",
+  },
+  {
+    year: "Depuis Janvier 2025",
+    title: "CDD Développeur Full Stack",
+    location: "Entreprise GATS",
+    description: "Premier contrat en CDD, prise de responsabilités sur des projets web et mobile.",
+    side: "left",
+  },
+];
 
 const About: React.FC = () => {
-  const skills = [
-    {
-      icon: <FaLaptopCode />,
-      title: "Front-end",
-      description: "Développement d'interfaces utilisateur modernes et réactives avec React, Vue.js et Angular."
-    },
-    {
-      icon: <FaServer />,
-      title: "Back-end",
-      description: "Création d'APIs robustes et évolutives avec Node.js, Express, et bases de données SQL/NoSQL."
-    },
-    {
-      icon: <FaCode />,
-      title: "Full Stack",
-      description: "Intégration complète de solutions web, du concept à la mise en production avec CI/CD."
-    }
-  ];
-
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -112,23 +112,38 @@ const About: React.FC = () => {
           transition={{ delay: 0.5, duration: 0.5 }}
           className="text-2xl font-bold text-center mb-10"
         >
-          Mes compétences
+          Mon parcours
         </motion.h3>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="relative max-w-3xl mx-auto"
         >
-          {skills.map((skill, index) => (
-            <SkillCard
-              key={index}
-              icon={skill.icon}
-              title={skill.title}
-              description={skill.description}
-            />
-          ))}
+          <div className="hidden md:block absolute left-1/2 top-0 h-full w-1 bg-blue-500 transform -translate-x-1/2"></div>
+          <div className="space-y-12">
+            {timeline.map((item, idx) => (
+              <div key={idx} className={`relative flex flex-col md:flex-row items-center ${item.side === "left" ? "md:justify-start" : "md:justify-end"}`}>
+                <div className={`w-full md:w-1/2 ${item.side === "left" ? "md:pr-8 md:order-1" : "md:pl-8 md:order-2"}`}>
+                  <div className="bg-gray-700 rounded-lg p-6 shadow-md">
+                    <div className="text-blue-400 font-semibold">{item.year}</div>
+                    <div className="text-xl font-bold">{item.title}</div>
+                    <div className="text-gray-300">{item.location}</div>
+                    <div className="mt-2 text-gray-400 text-sm">{item.description}</div>
+                  </div>
+                </div>
+                <div className="hidden md:flex flex-col items-center z-10">
+                  <div className="w-6 h-6 bg-blue-500 rounded-full border-4 border-gray-800 flex items-center justify-center text-white font-bold">
+                    {idx + 1}
+                  </div>
+                  {idx !== timeline.length - 1 && (
+                    <div className="flex-1 w-1 bg-blue-500"></div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </motion.section>
