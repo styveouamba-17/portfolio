@@ -42,7 +42,7 @@ export const portfolioData: PortfolioData = {
       titre: "Elegance - Site vitrine sur la vente des vetements en ligne",
       description: "Elegance est un site vitrine en ligne spécialisé dans la vente de vetements de haute qualité. Il offre une large gamme de produits pour hommes, femmes et enfants, avec des fonctionnalités de recherche avancée, un panier d'achat sécurisé et une passerelle de paiement intégrée.",
       technologies: ["React"],
-      image: "elegance.png",
+      image: "Elegance.png",
       lien: "https://elegance-beryl.vercel.app/",
       code: "https://github.com/Styveouamba/Elegance",
     }
