@@ -20,7 +20,7 @@ interface SkillsProps {
 }
 
 const getSkillIcon = (skill: string) => {
-  const iconMap: { [key: string]: JSX.Element } = {
+  const iconMap: { [key: string]: React.ReactElement } = {
     react: <FaReact className="text-cyan-400" />,
     "react native": <FaReact className="text-purple-400" />,
     typescript: <SiTypescript className="text-blue-500" />,
