@@ -34,7 +34,7 @@ export const portfolioData: PortfolioData = {
       description: "FixSen – Votre solution rapide pour tous vos besoins du quotidien ! De la coiffure à domicile, aux plats prêts à emporter, en passant par la livraison, le pressing ou le dépannage, FixSen vous connecte en un clic avec des professionnels de confiance proches de chez vous. Simple, rapide et local. Ce projet est sous accord de confidentialité et le code source ne peut pas être partagé publiquement.",
       technologies: ["React Native", "TypeScript", "Node.js", "MangoDb"],
       image: "fixSen.png",
-      lien: "https://expo.dev/accounts/styve_ouamba/projects/Fix-Sen/builds/e41e38ca-ab23-4838-be45-b6ac830788f5",
+      lien: "#",
       code: "#",
     },
     {
