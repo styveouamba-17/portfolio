@@ -151,6 +151,13 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                   </div>
                 </motion.a>
               </div>
+
+              {/* <div className="mt-8 pt-6 border-t border-white/10">
+                <h4 className="text-lg font-semibold mb-4 text-center">Télécharger mon CV</h4>
+                <div className="flex justify-center">
+                  <CVGenerator />
+                </div>
+              </div> */}
             </div>
           </motion.div>
 

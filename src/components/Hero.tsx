@@ -69,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ nom, titre, description }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12"
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -87,6 +87,15 @@ const Hero: React.FC<HeroProps> = ({ nom, titre, description }) => {
             >
               Me contacter
             </motion.button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0 }}
+            className="flex justify-center mb-12"
+          >
+            {/* <CVGenerator /> */}
           </motion.div>
 
           <motion.div

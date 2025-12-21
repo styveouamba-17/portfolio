@@ -23,15 +23,15 @@ const timeline = [
   },
   {
     year: "Août 2024 - Janvier 2025",
-    title: "Stage de 6 mois",
+    title: "Stage",
     location: "Entreprise GATS (gatsmapping)",
     description: "Stage en développement full stack, participation à des projets d'envergure.",
   },
   {
     year: "Depuis Janvier 2025",
-    title: "CDD Développeur Full Stack",
+    title: "Stage Développeur Full Stack",
     location: "Entreprise GATS",
-    description: "Premier contrat en CDD, prise de responsabilités sur des projets web et mobile.",
+    description: " prise de responsabilités sur des projets web et mobile.",
   },
 ];
 
