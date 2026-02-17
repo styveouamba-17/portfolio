@@ -9,9 +9,8 @@ import {
   FaGitAlt,
   FaGithub,
   FaFigma,
-  FaJira,
 } from "react-icons/fa";
-import { SiTypescript, SiTailwindcss, SiExpress, SiMongodb, SiFirebase } from "react-icons/si";
+import { SiTypescript, SiTailwindcss, SiExpress, SiMongodb, SiFirebase, SiJira } from "react-icons/si";
 import { TbApi } from "react-icons/tb";
 import { BiLogoVisualStudio } from "react-icons/bi";
 
@@ -21,24 +20,24 @@ interface SkillsProps {
 
 const getSkillIcon = (skill: string) => {
   const iconMap: { [key: string]: React.ReactElement } = {
-    react: <FaReact className="text-cyan-400" />,
-    "react native": <FaReact className="text-purple-400" />,
-    typescript: <SiTypescript className="text-blue-500" />,
-    html5: <FaHtml5 className="text-orange-500" />,
-    css3: <FaCss3Alt className="text-blue-400" />,
-    "tailwind css": <SiTailwindcss className="text-cyan-400" />,
-    "node.js": <FaNodeJs className="text-green-500" />,
-    express: <SiExpress className="text-gray-300" />,
+    react: <FaReact className="text-cyan-500" />,
+    "react native": <FaReact className="text-purple-500" />,
+    typescript: <SiTypescript className="text-blue-600" />,
+    html5: <FaHtml5 className="text-orange-600" />,
+    css3: <FaCss3Alt className="text-blue-500" />,
+    "tailwind css": <SiTailwindcss className="text-cyan-500" />,
+    "node.js": <FaNodeJs className="text-green-600" />,
+    express: <SiExpress className="text-gray-700" />,
     mongodb: <SiMongodb className="text-green-600" />,
     firebase: <SiFirebase className="text-yellow-500" />,
-    "restful api": <TbApi className="text-blue-300" />,
+    "restful api": <TbApi className="text-blue-500" />,
     git: <FaGitAlt className="text-orange-600" />,
-    github: <FaGithub className="text-gray-300" />,
-    "vs code": <BiLogoVisualStudio className="text-blue-500" />,
-    figma: <FaFigma className="text-purple-500" />,
-    jira: <FaJira className="text-blue-500" />,
+    github: <FaGithub className="text-gray-800" />,
+    "vs code": <BiLogoVisualStudio className="text-blue-600" />,
+    figma: <FaFigma className="text-purple-600" />,
+    jira: <SiJira className="text-blue-600" />,
   };
-  return iconMap[skill.toLowerCase()] || <FaReact className="text-gray-400" />;
+  return iconMap[skill.toLowerCase()] || <FaReact className="text-gray-600" />;
 };
 
 const Skills: React.FC<SkillsProps> = ({ competences }) => {
@@ -52,62 +51,51 @@ const Skills: React.FC<SkillsProps> = ({ competences }) => {
   };
 
   return (
-    <section id="competences" className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent"></div>
-
+    <section id="competences" className="py-32 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-4 relative z-10" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-accent">
-            Mes compétences
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          <span className="section-badge">Expertise</span>
+          <h2 className="text-4xl md:text-5xl font-bold mt-6 mb-4 text-gray-900">Mes Compétences</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Technologies et outils que j'utilise pour créer des applications modernes
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Object.entries(competences).map(([category, skills], index) => (
             <motion.div
               key={category}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
-              className="glass-effect rounded-2xl p-8 hover:bg-white/10 transition-all group"
+              transition={{ delay: index * 0.15, duration: 0.6 }}
+              className="bento-card"
             >
-              <h3 className="text-2xl font-bold mb-6 text-accent">
+              <h3 className="text-xl font-bold mb-6 text-gray-900">
                 {categoryLabels[category]}
               </h3>
 
-              <div className="space-y-4">
+              <div className="flex flex-wrap gap-3">
                 {skills.map((skill, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: index * 0.2 + i * 0.1, duration: 0.4 }}
-                    whileHover={{ x: 10, scale: 1.05 }}
-                    className="flex items-center gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-all cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: index * 0.15 + i * 0.05, duration: 0.3 }}
+                    className="skill-badge"
                   >
-                    <div className="text-3xl">{getSkillIcon(skill)}</div>
-                    <span className="text-gray-200 font-medium">{skill}</span>
+                    <span className="text-xl">{getSkillIcon(skill)}</span>
+                    <span className="text-sm">{skill}</span>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
           ))}
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="text-center text-gray-400 mt-16 italic text-lg"
-        >
-          En constante évolution pour maîtriser les dernières technologies
-        </motion.p>
       </div>
     </section>
   );

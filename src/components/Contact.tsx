@@ -52,152 +52,126 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
   };
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent"></div>
-
+    <section id="contact" className="py-32 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-4 relative z-10" ref={sectionRef}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-accent">
-            Me contacter
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+          <span className="section-badge">Contact</span>
+          <h2 className="text-4xl md:text-5xl font-bold mt-6 mb-4 text-gray-900">Travaillons Ensemble</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Un projet en tête ? N'hésitez pas à me contacter. Je serais ravi d'échanger avec vous.
           </p>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Contact Cards */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="space-y-8"
+            className="space-y-6"
           >
-            <div className="glass-effect rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Informations de contact</h3>
-
-              <div className="space-y-6">
-                <motion.a
-                  whileHover={{ x: 10 }}
-                  href={`mailto:${contact.email}`}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                    <FaEnvelope className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">Email</p>
-                    <p className="text-white font-medium group-hover:text-blue-300 transition-colors">
-                      {contact.email}
-                    </p>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  whileHover={{ x: 10 }}
-                  href={`tel:${contact.telephone}`}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                    <FaPhone className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">Téléphone</p>
-                    <p className="text-white font-medium group-hover:text-blue-300 transition-colors">
-                      {contact.telephone}
-                    </p>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  whileHover={{ x: 10 }}
-                  href={contact.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                    <FaLinkedin className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">LinkedIn</p>
-                    <p className="text-white font-medium group-hover:text-blue-300 transition-colors">
-                      Mon profil LinkedIn
-                    </p>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  whileHover={{ x: 10 }}
-                  href={contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center">
-                    <FaGithub className="text-white" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm">GitHub</p>
-                    <p className="text-white font-medium group-hover:text-blue-300 transition-colors">
-                      Mon GitHub
-                    </p>
-                  </div>
-                </motion.a>
+            <a
+              href={`mailto:${contact.email}`}
+              className="bento-card flex items-center gap-4 group"
+            >
+              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                <FaEnvelope size={24} />
               </div>
+              <div>
+                <p className="text-sm text-gray-500 mb-1">Email</p>
+                <p className="text-gray-900 font-medium">{contact.email}</p>
+              </div>
+            </a>
 
-              {/* <div className="mt-8 pt-6 border-t border-white/10">
-                <h4 className="text-lg font-semibold mb-4 text-center">Télécharger mon CV</h4>
-                <div className="flex justify-center">
-                  <CVGenerator />
-                </div>
-              </div> */}
-            </div>
+            <a
+              href={`tel:${contact.telephone}`}
+              className="bento-card flex items-center gap-4 group"
+            >
+              <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                <FaPhone size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 mb-1">Téléphone</p>
+                <p className="text-gray-900 font-medium">{contact.telephone}</p>
+              </div>
+            </a>
+
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bento-card flex items-center gap-4 group"
+            >
+              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                <FaLinkedin size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 mb-1">LinkedIn</p>
+                <p className="text-gray-900 font-medium">Mon profil</p>
+              </div>
+            </a>
+
+            <a
+              href={contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bento-card flex items-center gap-4 group"
+            >
+              <div className="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center text-gray-700 group-hover:bg-gray-700 group-hover:text-white transition-all">
+                <FaGithub size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 mb-1">GitHub</p>
+                <p className="text-gray-900 font-medium">Mon GitHub</p>
+              </div>
+            </a>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.6 }}
+            className="lg:col-span-2"
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="glass-effect rounded-2xl p-8 space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">
-                  Nom complet
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                  placeholder="Votre nom"
-                />
+            <form ref={formRef} onSubmit={handleSubmit} className="bento-card space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700">
+                    Nom complet
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
+                    placeholder="Votre nom"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
+                    placeholder="votre@email.com"
+                  />
+                </div>
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                  placeholder="votre@email.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700">
                   Message
                 </label>
                 <textarea
@@ -205,7 +179,7 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                   name="message"
                   rows={6}
                   required
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none text-gray-900"
                   placeholder="Votre message..."
                 ></textarea>
               </div>
@@ -214,25 +188,23 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg ${
+                  className={`p-4 rounded-xl ${
                     formStatus.isError
-                      ? "bg-red-500/20 border border-red-500/50 text-red-200"
-                      : "bg-green-500/20 border border-green-500/50 text-green-200"
+                      ? "bg-red-50 border border-red-200 text-red-700"
+                      : "bg-green-50 border border-green-200 text-green-700"
                   }`}
                 >
                   {formStatus.message}
                 </motion.div>
               )}
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 rounded-lg font-semibold text-lg flex items-center justify-center gap-3 transition-all ${
+                className={`w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all ${
                   isSubmitting
-                    ? "bg-gray-600 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700"
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "btn-solid"
                 }`}
               >
                 {isSubmitting ? (
@@ -265,7 +237,7 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
                     Envoyer le message
                   </>
                 )}
-              </motion.button>
+              </button>
             </form>
           </motion.div>
         </div>

@@ -39,24 +39,24 @@ const Navbar: React.FC<NavbarProps> = ({ nom }) => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "glass-effect shadow-lg" : "bg-transparent"
+        scrolled ? "bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold cursor-pointer text-accent"
+            className="text-2xl font-bold cursor-pointer"
             onClick={() => scrollToSection("accueil")}
           >
-            {nom}
+            <span className="gradient-text">{nom}</span>
           </motion.div>
 
-          <ul className="hidden md:flex space-x-1">
+          <ul className="hidden md:flex space-x-2">
             {sections.map((section) => (
               <motion.li key={section.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <button
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+                  className="px-5 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all"
                   onClick={() => scrollToSection(section.id)}
                 >
                   {section.label}
@@ -68,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ nom }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10"
+              className="p-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50"
             >
               {isOpen ? (
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,13 +89,13 @@ const Navbar: React.FC<NavbarProps> = ({ nom }) => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden glass-effect"
+          className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200"
         >
           <div className="px-4 py-4 space-y-2">
             {sections.map((section) => (
               <button
                 key={section.id}
-                className="block w-full text-left px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all"
+                className="block w-full text-left px-4 py-3 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all"
                 onClick={() => scrollToSection(section.id)}
               >
                 {section.label}
