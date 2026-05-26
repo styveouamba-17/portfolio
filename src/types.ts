@@ -16,12 +16,13 @@ export interface PortfolioData {
     };
   }
   
-  export interface Projet {
-    id: number;
-    titre: string;
-    description: string;
-    technologies: string[];
-    image: string;
-    lien: string;
-    code: string;
-  }
+export interface Projet {
+  id: number;
+  titre: string;
+  description: string;
+  technologies: string[];
+  image: string;
+  lien: string;
+  code: string;
+  categorie: "site-web" | "app-web" | "mobile";
+}

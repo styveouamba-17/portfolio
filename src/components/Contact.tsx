@@ -1,8 +1,16 @@
 import { motion, useInView } from "framer-motion";
 import type { PortfolioData } from "../types";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaPaperPlane } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaLocationDot,
+  FaPhone,
+  FaSpinner,
+} from "react-icons/fa6";
 
 interface ContactProps {
   contact: PortfolioData["contact"];
@@ -14,12 +22,13 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
     isError: boolean;
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const formRef = useRef<HTMLFormElement>(null);
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     if (!formRef.current) return;
 
@@ -27,23 +36,23 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
       setIsSubmitting(true);
       setFormStatus(null);
 
-      const serviceId = "service_ges4s8i";
-      const templateId = "template_y93yja4";
-      const publicKey = "lDilUcH93k2Ip-Qv6";
-
-      const result = await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey);
+      const result = await emailjs.sendForm(
+        "service_ges4s8i",
+        "template_y93yja4",
+        formRef.current,
+        "lDilUcH93k2Ip-Qv6"
+      );
 
       if (result.text === "OK") {
         setFormStatus({
-          message: "Message envoyé avec succès ! Je vous répondrai bientôt.",
+          message: "Message envoyé. Je reviens vers vous bientôt.",
           isError: false,
         });
         formRef.current.reset();
       }
-    } catch (error) {
-      console.error("Erreur d'envoi:", error);
+    } catch {
       setFormStatus({
-        message: "Une erreur s'est produite. Veuillez réessayer.",
+        message: "Échec de l'envoi. Réessayez ou contactez-moi directement.",
         isError: true,
       });
     } finally {
@@ -51,147 +60,217 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
     }
   };
 
+  const links = [
+    {
+      label: "Email",
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+      icon: FaEnvelope,
+    },
+    {
+      label: "Téléphone",
+      value: contact.telephone,
+      href: `tel:${contact.telephone}`,
+      icon: FaPhone,
+    },
+    {
+      label: "LinkedIn",
+      value: "linkedin.com/in/styve",
+      href: contact.linkedin,
+      icon: FaLinkedin,
+    },
+    {
+      label: "GitHub",
+      value: "github.com/Styveouamba",
+      href: contact.github,
+      icon: FaGithub,
+    },
+  ];
+
   return (
-    <section id="contact" className="py-32 relative overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto px-4 relative z-10" ref={sectionRef}>
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="relative overflow-hidden bg-slate-950 px-4 py-24 text-white sm:py-28"
+    >
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.12)_1px,transparent_1px)] bg-[size:72px_72px]" />
+
+      <div className="mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="mb-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"
         >
-          <span className="section-badge">Contact</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-6 mb-4 text-gray-900">Travaillons Ensemble</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Un projet en tête ? N'hésitez pas à me contacter. Je serais ravi d'échanger avec vous.
-          </p>
+          <div>
+            <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-300">
+              <span className="h-1.5 w-8 rounded-full bg-white" />
+              Contact
+            </div>
+
+            <h2 className="text-4xl font-bold leading-tight tracking-normal text-white md:text-5xl lg:text-6xl">
+              Travaillons ensemble.
+            </h2>
+          </div>
+
+          <div className="flex flex-col justify-end">
+            <p className="max-w-2xl text-lg leading-8 text-slate-300">
+              Un projet, une idée ou une opportunité ? Envoyez-moi un message.
+              Je réponds généralement rapidement et je serai ravi d’échanger sur
+              votre besoin.
+            </p>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Contact Cards */}
+        <div className="grid gap-8 lg:grid-cols-[380px_1fr]">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="space-y-6"
+            transition={{ delay: 0.15, duration: 0.65, ease: "easeOut" }}
+            className="space-y-5"
           >
-            <a
-              href={`mailto:${contact.email}`}
-              className="bento-card flex items-center gap-4 group"
-            >
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <FaEnvelope size={24} />
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+              <div className="flex items-center gap-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]" />
+                <span className="text-sm font-semibold text-emerald-300">
+                  Disponible pour de nouveaux projets
+                </span>
               </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Email</p>
-                <p className="text-gray-900 font-medium">{contact.email}</p>
-              </div>
-            </a>
 
-            <a
-              href={`tel:${contact.telephone}`}
-              className="bento-card flex items-center gap-4 group"
-            >
-              <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all">
-                <FaPhone size={24} />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Téléphone</p>
-                <p className="text-gray-900 font-medium">{contact.telephone}</p>
-              </div>
-            </a>
+              <p className="mt-4 text-sm leading-6 text-slate-400">
+                Basé à Dakar, disponible pour des missions web, mobile,
+                full stack ou des collaborations produit.
+              </p>
+            </div>
 
-            <a
-              href={contact.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bento-card flex items-center gap-4 group"
-            >
-              <div className="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <FaLinkedin size={24} />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">LinkedIn</p>
-                <p className="text-gray-900 font-medium">Mon profil</p>
-              </div>
-            </a>
+            <div className="space-y-3">
+              {links.map((link, index) => {
+                const Icon = link.icon;
 
-            <a
-              href={contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bento-card flex items-center gap-4 group"
-            >
-              <div className="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center text-gray-700 group-hover:bg-gray-700 group-hover:text-white transition-all">
-                <FaGithub size={24} />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">GitHub</p>
-                <p className="text-gray-900 font-medium">Mon GitHub</p>
-              </div>
-            </a>
+                return (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      link.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{
+                      delay: 0.25 + index * 0.07,
+                      duration: 0.5,
+                    }}
+                    className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-white/20 hover:bg-white/[0.07]"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-slate-950">
+                      <Icon size={17} />
+                    </span>
+
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                        {link.label}
+                      </span>
+                      <span className="mt-1 block truncate text-sm font-semibold text-slate-200">
+                        {link.value}
+                      </span>
+                    </span>
+
+                    <FaArrowRight
+                      size={13}
+                      className="text-slate-500 transition group-hover:translate-x-0.5 group-hover:text-white"
+                    />
+                  </motion.a>
+                );
+              })}
+            </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="lg:col-span-2"
+            transition={{ delay: 0.25, duration: 0.65, ease: "easeOut" }}
+            className="rounded-2xl border border-white/10 bg-white p-5 text-slate-950 shadow-2xl shadow-black/20 md:p-6"
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="bento-card space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-semibold text-slate-700"
+                  >
                     Nom complet
                   </label>
                   <input
-                    type="text"
                     id="name"
+                    type="text"
                     name="name"
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
                     placeholder="Votre nom"
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:bg-white"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
-                    Email
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-semibold text-slate-700"
+                  >
+                    Adresse email
                   </label>
                   <input
-                    type="email"
                     id="email"
+                    type="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-gray-900"
                     placeholder="votre@email.com"
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:bg-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700">
+                <label
+                  htmlFor="subject"
+                  className="mb-2 block text-sm font-semibold text-slate-700"
+                >
+                  Sujet
+                </label>
+                <input
+                  id="subject"
+                  type="text"
+                  name="subject"
+                  placeholder="Projet, collaboration, question..."
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-medium outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:bg-white"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-sm font-semibold text-slate-700"
+                >
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={6}
                   required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none text-gray-900"
-                  placeholder="Votre message..."
-                ></textarea>
+                  placeholder="Décrivez votre projet ou votre besoin..."
+                  className="min-h-36 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium leading-6 outline-none transition placeholder:text-slate-400 focus:border-slate-950 focus:bg-white"
+                />
               </div>
 
               {formStatus && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-xl ${
+                  className={`rounded-xl px-4 py-3 text-sm font-semibold ${
                     formStatus.isError
-                      ? "bg-red-50 border border-red-200 text-red-700"
-                      : "bg-green-50 border border-green-200 text-green-700"
+                      ? "bg-red-50 text-red-700 ring-1 ring-red-200"
+                      : "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
                   }`}
                 >
                   {formStatus.message}
@@ -201,46 +280,37 @@ const Contact: React.FC<ContactProps> = ({ contact }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all ${
-                  isSubmitting
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "btn-solid"
-                }`}
+                className="flex h-12 w-full items-center justify-center gap-3 rounded-xl bg-slate-950 px-5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
               >
                 {isSubmitting ? (
                   <>
-                    <svg
-                      className="animate-spin h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
+                    <FaSpinner size={15} className="animate-spin" />
                     Envoi en cours...
                   </>
                 ) : (
                   <>
-                    <FaPaperPlane />
                     Envoyer le message
+                    <FaArrowRight size={13} />
                   </>
                 )}
               </button>
             </form>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.75 }}
+          className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-500"
+        >
+          <span>© 2026 Styve Ouamba. Tous droits réservés.</span>
+
+          <span className="inline-flex items-center gap-2">
+            <FaLocationDot size={13} />
+            Dakar, Sénégal
+          </span>
+        </motion.div>
       </div>
     </section>
   );
