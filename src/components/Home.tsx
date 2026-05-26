@@ -4,7 +4,6 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaArrowRight,
-  FaDownload,
 } from "react-icons/fa";
 
 interface HomeProps {
@@ -96,14 +95,6 @@ const Home: React.FC<HomeProps> = ({ nom, titre, description }) => {
             >
               Me contacter
             </button>
-
-            <a
-              href="/cv.pdf"
-              className="inline-flex items-center gap-3 rounded-xl px-4 py-3.5 text-sm font-semibold text-slate-700 transition hover:text-slate-950"
-            >
-              <FaDownload size={14} />
-              CV
-            </a>
           </motion.div>
 
           <motion.div
