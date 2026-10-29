@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -451,13 +450,6 @@
     padding: clamp(20px, 3vw, 28px) clamp(16px, 4vw, 24px);
   }
 
-  .about-copy h2 {
-    font-size: clamp(36px, 8vw, 64px);
-  }
-
-  .about-copy > p {
-    font-size: clamp(16px, 2vw, 20px);
-  }
 
   .about-principle {
     font-size: 12px;
@@ -532,13 +524,6 @@ h1, h2, h3, h4, h5, h6 {
   animation: pulse 2.3s ease-out infinite;
 }
 
-/* Glass morphism */
-.glass-card {
-  background: rgba(12, 12, 11, .72);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(244, 239, 229, .2);
-  border-radius: 8px;
-}
 
 /* Constellation lines */
 .constellation-line {
@@ -589,10 +574,6 @@ a {
     line-height: 1.1;
   }
 
-  .glass-card {
-    padding: 16px;
-    border-radius: 10px;
-  }
 
   /* Reduce spacing on mobile */
   .about-scene,
@@ -623,10 +604,6 @@ a {
     opacity: 0 !important;
   }
 
-  /* Create a grid layout for cards on mobile */
-  body:has(.constellation-card[style*="opacity: 1"]) {
-    --constellation-mobile: true;
-  }
 }
 
 /* Mobile constellation grid wrapper */
@@ -944,20 +921,6 @@ a {
   line-height: 1.65;
 }
 
-.skills-meter {
-  height: 6px;
-  margin: 22px 0;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-}
-
-.skills-meter span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), rgba(120, 183, 255, .85));
-}
 
 .skills-chip-grid {
   display: flex;
@@ -2858,3 +2821,124 @@ a {
   }
 }
 
+
+/* Raccourcis de l'accueil (Projets, CV) */
+.app-shortcuts {
+  position: absolute;
+  top: clamp(18px, 4vh, 36px);
+  right: clamp(16px, 4vw, 48px);
+  z-index: 45;
+  display: flex;
+  gap: 10px;
+}
+
+.app-shortcuts a,
+.app-shortcuts button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(244, 239, 229, 0.18);
+  border-radius: 999px;
+  background: rgba(12, 12, 11, 0.6);
+  padding: 10px 16px;
+  color: var(--ink);
+  font-size: 13px;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.app-shortcuts .is-primary {
+  border-color: color-mix(in srgb, var(--amber), transparent 40%);
+  background: color-mix(in srgb, var(--amber), transparent 84%);
+}
+
+.app-shortcuts a:hover,
+.app-shortcuts button:hover {
+  border-color: var(--amber);
+}
+
+.app-shortcuts a:focus-visible,
+.app-shortcuts button:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .app-shortcuts {
+    top: auto;
+    bottom: 20px;
+    left: 16px;
+    right: 16px;
+    justify-content: center;
+  }
+}
+
+/* Projets : capture, badge et étude de cas */
+.work-panel-media {
+  margin: -8px -8px 20px;
+  overflow: hidden;
+  border: 1px solid rgba(244, 239, 229, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  aspect-ratio: 2 / 1;
+}
+
+.work-panel-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.work-badge {
+  margin-left: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent), transparent 82%);
+  padding: 3px 8px;
+  color: var(--ink);
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+.work-case {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  border-left: 2px solid color-mix(in srgb, var(--accent), transparent 50%);
+  padding-left: 14px;
+}
+
+.work-case dt {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.work-case dd {
+  margin: 4px 0 0;
+  color: #ddd5c8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.work-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Moins d'animations pour ceux qui le demandent */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

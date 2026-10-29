@@ -1,28 +1,89 @@
-export interface PortfolioData {
-    nom: string;
-    titre: string;
-    description: string;
-    competences: {
-      frontend: string[];
-      backend: string[];
-      outils: string[];
-    };
-    projets: Projet[];
-    contact: {
-      email: string;
-      telephone: string;
-      linkedin: string;
-      github: string;
-    };
-  }
-  
+export type SectionId = "about" | "skills" | "work" | "path" | "contact";
+
+export interface SectionMeta {
+  id: SectionId;
+  /** Ancre utilisée dans l'URL (ex. #projets). */
+  hash: string;
+  label: string;
+  eyebrow: string;
+  description: string;
+  accent: string;
+  /** Position du nœud sur la carte, en % de l'écran. */
+  node: { x: number; y: number };
+  /** Ligne SVG reliant le centre au nœud (viewBox 0 0 100 100). */
+  line: string;
+  /** Déplacement de la carte quand la section est ouverte. */
+  pan: { x: string; y: string };
+}
+
+export interface Profile {
+  nom: string;
+  titre: string;
+  accroche: string;
+  ville: string;
+  pays: string;
+  disponibilite: string;
+  /** Année du premier poste en entreprise, pour calculer l'expérience. */
+  debutPro: number;
+  /** Chemin du CV dans /public. Laisser vide pour masquer le bouton. */
+  cv: string;
+  contact: {
+    email: string;
+    /** Format international sans espaces, ex. +221771234567. Laisser vide pour masquer. */
+    telephone: string;
+    linkedin: string;
+    github: string;
+  };
+}
+
+export interface SkillCategory {
+  id: string;
+  label: string;
+  eyebrow: string;
+  description: string;
+  skills: string[];
+  x: string;
+  y: string;
+}
+
+export type ProjectCategoryId = "site-web" | "app-web" | "mobile";
+
+export interface ProjectCategory {
+  id: ProjectCategoryId;
+  label: string;
+  eyebrow: string;
+  description: string;
+  x: string;
+  y: string;
+}
+
+export interface CaseStudy {
+  role: string;
+  defi: string;
+  resultat: string;
+}
+
 export interface Projet {
   id: number;
   titre: string;
   description: string;
   technologies: string[];
   image: string;
-  lien: string;
-  code: string;
-  categorie: "site-web" | "app-web" | "mobile";
+  categorie: ProjectCategoryId;
+  lien?: string;
+  code?: string;
+  /** Projet mis en avant : affiché en premier avec un badge. */
+  aLaUne?: boolean;
+  etudeDeCas?: CaseStudy;
+}
+
+export interface TimelineStep {
+  periode: string;
+  titre: string;
+  lieu: string;
+  description: string;
+  acquis: string;
+  type: "formation" | "experience" | "actuel";
+  x: string;
+  y: string;
 }
