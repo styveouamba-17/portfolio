@@ -7,8 +7,6 @@ export const skillCategories: SkillCategory[] = [
     eyebrow: "Interface",
     description: "Interfaces web et mobiles, composants réutilisables, animations et expérience utilisateur.",
     skills: ["React", "React Native", "TypeScript", "HTML5", "CSS3", "Tailwind CSS"],
-    x: "30%",
-    y: "30%",
   },
   {
     id: "backend",
@@ -16,8 +14,6 @@ export const skillCategories: SkillCategory[] = [
     eyebrow: "Logique",
     description: "APIs REST, authentification, modélisation et gestion des données.",
     skills: ["Node.js", "Express", "MongoDB", "Firebase", "API REST"],
-    x: "72%",
-    y: "28%",
   },
   {
     id: "outils",
@@ -25,8 +21,6 @@ export const skillCategories: SkillCategory[] = [
     eyebrow: "Workflow",
     description: "Maquettes, versioning, suivi de projet et livraison.",
     skills: ["Git", "GitHub", "VS Code", "Figma", "Jira"],
-    x: "58%",
-    y: "70%",
   },
 ];
 

@@ -6,24 +6,18 @@ export const projectCategories: ProjectCategory[] = [
     label: "Sites web",
     eyebrow: "Vitrine",
     description: "Identité, présence en ligne et conversion.",
-    x: "30%",
-    y: "30%",
   },
   {
     id: "app-web",
     label: "Applications web",
     eyebrow: "Produit",
     description: "Interfaces métier, tableaux de bord, logique utilisateur et données.",
-    x: "72%",
-    y: "28%",
   },
   {
     id: "mobile",
     label: "Mobile",
     eyebrow: "Terrain",
     description: "Applications mobiles pensées pour l'usage au quotidien.",
-    x: "58%",
-    y: "70%",
   },
 ];
 
@@ -152,3 +146,11 @@ export const projets: Projet[] = [
     categorie: "mobile",
   },
 ];
+
+const featuredFirst = (a: Projet, b: Projet) => Number(!!b.aLaUne) - Number(!!a.aLaUne);
+
+/** Projets web (sites et applications), ceux « à la une » en premier. */
+export const webProjects = projets.filter((projet) => projet.categorie !== "mobile").sort(featuredFirst);
+
+/** Applications mobiles, celles « à la une » en premier. */
+export const mobileProjects = projets.filter((projet) => projet.categorie === "mobile").sort(featuredFirst);

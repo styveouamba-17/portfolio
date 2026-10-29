@@ -9,8 +9,6 @@ export const timeline: TimelineStep[] = [
       "Spécialité mathématiques. Première vraie confrontation avec la logique, la rigueur et la résolution de problèmes.",
     acquis: "Logique",
     type: "formation",
-    x: "24%",
-    y: "34%",
   },
   {
     periode: "Juil. - août 2021",
@@ -20,8 +18,6 @@ export const timeline: TimelineStep[] = [
       "Premier contact avec le monde professionnel : développement web, maintenance et compréhension du terrain.",
     acquis: "Terrain",
     type: "experience",
-    x: "42%",
-    y: "23%",
   },
   {
     periode: "2023 - 2024",
@@ -31,8 +27,6 @@ export const timeline: TimelineStep[] = [
       "Projets web et mobiles, gestion de projet et mise en place progressive d'une méthode de travail.",
     acquis: "Bases",
     type: "formation",
-    x: "62%",
-    y: "38%",
   },
   {
     periode: "Août 2024 - janv. 2025",
@@ -42,8 +36,6 @@ export const timeline: TimelineStep[] = [
       "Participation à des projets d'envergure, montée en compétence rapide et meilleure lecture des contraintes produit.",
     acquis: "Full stack",
     type: "experience",
-    x: "78%",
-    y: "58%",
   },
   {
     periode: "Janv. - déc. 2025",
@@ -53,8 +45,6 @@ export const timeline: TimelineStep[] = [
       "Prise de responsabilités : conception et développement de bout en bout d'interfaces et de services métier.",
     acquis: "Autonomie",
     type: "experience",
-    x: "55%",
-    y: "72%",
   },
   {
     periode: "Depuis janv. 2026",
@@ -64,7 +54,5 @@ export const timeline: TimelineStep[] = [
       "Conception, développement et amélioration continue de produits web et mobiles.",
     acquis: "Produit",
     type: "actuel",
-    x: "30%",
-    y: "66%",
   },
 ];

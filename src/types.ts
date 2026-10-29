@@ -1,21 +1,3 @@
-export type SectionId = "about" | "skills" | "work" | "path" | "contact";
-
-export interface SectionMeta {
-  id: SectionId;
-  /** Ancre utilisée dans l'URL (ex. #projets). */
-  hash: string;
-  label: string;
-  eyebrow: string;
-  description: string;
-  accent: string;
-  /** Position du nœud sur la carte, en % de l'écran. */
-  node: { x: number; y: number };
-  /** Ligne SVG reliant le centre au nœud (viewBox 0 0 100 100). */
-  line: string;
-  /** Déplacement de la carte quand la section est ouverte. */
-  pan: { x: string; y: string };
-}
-
 export interface Profile {
   nom: string;
   titre: string;
@@ -42,8 +24,6 @@ export interface SkillCategory {
   eyebrow: string;
   description: string;
   skills: string[];
-  x: string;
-  y: string;
 }
 
 export type ProjectCategoryId = "site-web" | "app-web" | "mobile";
@@ -53,8 +33,6 @@ export interface ProjectCategory {
   label: string;
   eyebrow: string;
   description: string;
-  x: string;
-  y: string;
 }
 
 export interface CaseStudy {
@@ -84,6 +62,4 @@ export interface TimelineStep {
   description: string;
   acquis: string;
   type: "formation" | "experience" | "actuel";
-  x: string;
-  y: string;
 }
